@@ -117,7 +117,9 @@ export default function withDragAndDrop(Calendar) {
       this.components = mergeComponents(components, {
         eventWrapper: EventWrapper,
         eventContainerWrapper: EventContainerWrapper,
-        weekWrapper: WeekWrapper,
+        weekWrapper: props => (
+          <WeekWrapper {...props} handlePreviewMove={this.handlePreviewMove} />
+        ),
       })
 
       this.state = { interacting: false }
@@ -151,7 +153,7 @@ export default function withDragAndDrop(Calendar) {
     }
 
     handleInteractionStart = () => {
-      if (this.state.interacting === false) this.setState({ interacting: true })
+      this.setState({ interacting: false })
     }
 
     handleInteractionEnd = interactionInfo => {
@@ -171,6 +173,10 @@ export default function withDragAndDrop(Calendar) {
       interactionInfo.event = event
       if (action === 'move') this.props.onEventDrop(interactionInfo)
       if (action === 'resize') this.props.onEventResize(interactionInfo)
+    }
+
+    handlePreviewMove = preview => {
+      this.props.onEventDrop(preview)
     }
 
     render() {
