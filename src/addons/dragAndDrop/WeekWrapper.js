@@ -4,7 +4,6 @@ import * as dates from '../../utils/dates'
 import { getSlotAtX, pointInBox } from '../../utils/selection'
 import { findDOMNode } from 'react-dom'
 
-import { eventSegments } from '../../utils/eventLevels'
 import Selection, { getBoundsForNode } from '../../Selection'
 import EventRow from '../../EventRow'
 import { dragAccessors } from './common'
@@ -30,6 +29,7 @@ class WeekWrapper extends React.Component {
     getters: PropTypes.object.isRequired,
     components: PropTypes.object.isRequired,
     resourceId: PropTypes.any,
+    handlePreviewMove: PropTypes.func,
   }
 
   static contextTypes = {
@@ -61,22 +61,7 @@ class WeekWrapper extends React.Component {
   }
 
   update(event, start, end) {
-    const segment = eventSegments(
-      { ...event, end, start, __isPreview: true },
-      this.props.slotMetrics.range,
-      dragAccessors
-    )
-
-    const { segment: lastSegment } = this.state
-    if (
-      lastSegment &&
-      segment.span === lastSegment.span &&
-      segment.left === lastSegment.left &&
-      segment.right === lastSegment.right
-    ) {
-      return
-    }
-    this.setState({ segment })
+    this.props.handlePreviewMove({ event, start, end })
   }
 
   handleMove = ({ x, y }, node, draggedEvent) => {
