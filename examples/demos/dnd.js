@@ -42,7 +42,13 @@ class Dnd extends React.Component {
     this.moveEvent({ event, start, end })
   }
 
-  moveEvent = ({ event, start, end, isAllDay: droppedOnAllDaySlot }) => {
+  moveEvent = ({
+    event,
+    start,
+    end,
+    isAllDay: droppedOnAllDaySlot,
+    __isPreview = false,
+  }) => {
     const { events } = this.state
 
     let allDay = event.allDay
@@ -55,7 +61,7 @@ class Dnd extends React.Component {
 
     const nextEvents = events.map(existingEvent => {
       return existingEvent.id == event.id
-        ? { ...existingEvent, start, end }
+        ? { ...existingEvent, start, end, __isPreview }
         : existingEvent
     })
 
