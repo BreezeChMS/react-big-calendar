@@ -135,6 +135,7 @@ class DateContentRow extends React.Component {
       onDoubleClick,
       resourceId,
       slotMetrics: metrics,
+      showMoreForSingleton: this.props.showMoreForSingleton,
     }
 
     return (
@@ -211,6 +212,7 @@ DateContentRow.propTypes = {
 
   minRows: PropTypes.number.isRequired,
   maxRows: PropTypes.number.isRequired,
+  showMoreForSingleton: PropTypes.bool,
 }
 
 DateContentRow.defaultProps = {

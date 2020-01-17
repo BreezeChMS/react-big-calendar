@@ -64,6 +64,9 @@ class EventEndingRow extends React.Component {
   }
 
   canRenderSlotEvent(slot, span) {
+    if (this.props.showMoreForSingleton) {
+      return false
+    }
     let { segments } = this.props
 
     return range(slot, slot + span).every(s => {
