@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
-import * as animationFrame from 'dom-helpers/animationFrame'
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import memoize from 'memoize-one'
@@ -27,18 +26,10 @@ export default class TimeGrid extends Component {
     this._scrollRatio = null
   }
 
-  componentWillMount() {
-    this.calculateScroll()
-  }
-
   componentDidMount() {
-    this.checkOverflow()
-
     if (this.props.width == null) {
       this.measureGutter()
     }
-
-    this.applyScroll()
 
     window.addEventListener('resize', this.handleResize)
   }
@@ -49,15 +40,8 @@ export default class TimeGrid extends Component {
     }
   }
 
-  handleResize = () => {
-    animationFrame.cancel(this.rafHandle)
-    this.rafHandle = animationFrame.request(this.checkOverflow)
-  }
-
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize)
-
-    animationFrame.cancel(this.rafHandle)
 
     if (this.measureGutterAnimationFrameRequest) {
       window.cancelAnimationFrame(this.measureGutterAnimationFrameRequest)
@@ -68,20 +52,10 @@ export default class TimeGrid extends Component {
     if (this.props.width == null) {
       this.measureGutter()
     }
-
-    this.applyScroll()
-    //this.checkOverflow()
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { range, scrollToTime } = this.props
-    // When paginating, reset scroll
-    if (
-      !dates.eq(nextProps.range[0], range[0], 'minute') ||
-      !dates.eq(nextProps.scrollToTime, scrollToTime, 'minute')
-    ) {
-      this.calculateScroll(nextProps)
-    }
+  componentWillReceiveProps() {
+    const { range } = this.props
   }
 
   gutterRef = ref => {
@@ -267,38 +241,6 @@ export default class TimeGrid extends Component {
     )
   }
 
-  applyScroll() {
-    if (this._scrollRatio != null) {
-      const content = this.contentRef.current
-      content.scrollTop = content.scrollHeight * this._scrollRatio
-      // Only do this once
-      this._scrollRatio = null
-    }
-  }
-
-  calculateScroll(props = this.props) {
-    const { min, max, scrollToTime } = props
-
-    const diffMillis = scrollToTime - dates.startOf(scrollToTime, 'day')
-    const totalMillis = dates.diff(max, min)
-
-    this._scrollRatio = diffMillis / totalMillis
-  }
-
-  checkOverflow = () => {
-    if (this._updatingOverflow) return
-
-    const content = this.contentRef.current
-    let isOverflowing = content.scrollHeight > content.clientHeight
-
-    if (this.state.isOverflowing !== isOverflowing) {
-      this._updatingOverflow = true
-      this.setState({ isOverflowing }, () => {
-        this._updatingOverflow = false
-      })
-    }
-  }
-
   memoizedResources = memoize((resources, accessors) =>
     Resources(resources, accessors)
   )
@@ -315,7 +257,6 @@ TimeGrid.propTypes = {
   max: PropTypes.instanceOf(Date),
   getNow: PropTypes.func.isRequired,
 
-  scrollToTime: PropTypes.instanceOf(Date),
   showMultiDayTimes: PropTypes.bool,
 
   rtl: PropTypes.bool,
@@ -347,5 +288,4 @@ TimeGrid.defaultProps = {
   timeslots: 2,
   min: dates.startOf(new Date(), 'day'),
   max: dates.endOf(new Date(), 'day'),
-  scrollToTime: dates.startOf(new Date(), 'day'),
 }
