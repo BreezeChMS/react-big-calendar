@@ -54,10 +54,6 @@ export default class TimeGrid extends Component {
     }
   }
 
-  componentWillReceiveProps() {
-    const { range } = this.props
-  }
-
   gutterRef = ref => {
     this.gutter = ref && findDOMNode(ref)
   }
