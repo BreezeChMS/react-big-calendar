@@ -83,7 +83,9 @@ class DateContentRow extends React.Component {
           <div className="rbc-row" ref={this.createEventRef}>
             <div className="rbc-row-segment">
               <div className="rbc-event">
-                <div className="rbc-event-content">&nbsp;</div>
+                <div className="rbc-event-content">
+                  <span>&nbsp;</span>
+                </div>
               </div>
             </div>
           </div>
@@ -135,6 +137,7 @@ class DateContentRow extends React.Component {
       onDoubleClick,
       resourceId,
       slotMetrics: metrics,
+      showMoreForSingleton: this.props.showMoreForSingleton,
     }
 
     return (
@@ -211,6 +214,7 @@ DateContentRow.propTypes = {
 
   minRows: PropTypes.number.isRequired,
   maxRows: PropTypes.number.isRequired,
+  showMoreForSingleton: PropTypes.bool,
 }
 
 DateContentRow.defaultProps = {
