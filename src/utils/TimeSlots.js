@@ -128,6 +128,14 @@ export function getSlotMetrics({ min: start, max: end, step, timeslots }) {
       if (!ignoreMin) rangeStart = dates.min(end, dates.max(start, rangeStart))
       if (!ignoreMax) rangeEnd = dates.min(end, dates.max(start, rangeEnd))
 
+      if (dates.minutes(rangeEnd) === 59) {
+        rangeEnd = dates.subtract(
+          dates.min(end, dates.max(start, rangeEnd)),
+          4,
+          'minutes'
+        )
+      }
+
       const rangeStartMin = positionFromDate(rangeStart)
       const rangeEndMin = positionFromDate(rangeEnd)
       const top =

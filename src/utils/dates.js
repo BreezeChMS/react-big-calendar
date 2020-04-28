@@ -17,6 +17,7 @@ export {
   lt,
   inRange,
   min,
+  subtract,
   max,
 } from 'date-arithmetic'
 
