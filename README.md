@@ -1,14 +1,15 @@
 # react-big-calendar
+## Fork Maintained by [BreezeChMS](https://github.com/BreezeChMS/)
 
 An events calendar component built for React and made for modern browsers (read: IE10+) and uses flexbox over the classic tables-ception approach.
 
-[**DEMO and Docs**](http://intljusticemission.github.io/react-big-calendar/examples/index.html)
+[**DEMO and Docs**](http://breezechms.github.io/react-big-calendar/examples/index.html)
 
 Inspired by [Full Calendar](http://fullcalendar.io/).
 
 ## Use and Setup
 
-`yarn add react-big-calendar` or `npm install --save react-big-calendar`
+`yarn add https://github.com/BreezeChMS/react-big-calendar` or `npm install --save https://github.com/BreezeChMS/react-big-calendar`
 
 Include `react-big-calendar/lib/css/react-big-calendar.css` for styles, and make sure your calendar's container
 element has a height, or the calendar won't be visible. To provide your own custom styling, see the [Custom Styling](#custom-styling) topic.
@@ -21,7 +22,7 @@ element has a height, or the calendar won't be visible. To provide your own cust
 ## Run examples locally
 
 ```sh
-$ git clone git@github.com:intljusticemission/react-big-calendar.git
+$ git clone git@github.com:BreezeChMS/react-big-calendar.git
 $ cd react-big-calendar
 $ yarn
 $ yarn examples
@@ -123,7 +124,3 @@ Big Calendar to match your application styling. For this reason SASS files are i
 SASS implementation provides a `variables` file containing color and sizing variables that you can
 update to fit your application. _Note:_ Changing and/or overriding styles can cause rendering issues with your
 Big Calendar. Carefully test each change accordingly.
-
-## Join us on Reactiflux Discord
-
-Join us on [Reactiflux Discord](https://discord.gg/uJsgpkC) community under the channel #react-big-calendar if you have any questions.

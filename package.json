@@ -6,9 +6,12 @@
     "name": "Jason Quense",
     "email": "monastic.panic@gmail.com"
   },
+  "maintainers": {
+    "name": "BreezeChMS",
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/intljusticemission/react-big-calendar.git"
+    "url": "git+https://github.com/BreezeChMS/react-big-calendar.git"
   },
   "license": "MIT",
   "main": "lib/index.js",
@@ -48,7 +51,7 @@
     "storybook": "start-storybook -p 9002",
     "test": "npm run lint && jest",
     "tdd": "jest --watch",
-    "release": "rollout",
+    "release": "rollout --skip-npm",
     "prepublishOnly": "npm run build",
     "prettier": "prettier '**/*js' !examples/bundle.js '!lib/**' --write ",
     "precommit": "lint-staged"
@@ -143,9 +146,8 @@
     "babel-core": "7.0.0-bridge.0"
   },
   "bugs": {
-    "url": "https://github.com/intljusticemission/react-big-calendar/issues"
+    "url": "https://github.com/BreezeChMS/react-big-calendar/issues"
   },
   "readme": "ERROR: No README data found!",
-  "homepage": "https://github.com/intljusticemission/react-big-calendar#readme",
-  "_id": "react-big-calendar@0.23.8"
+  "homepage": "https://github.com/BreezeChMS/react-big-calendar#readme",
 }
